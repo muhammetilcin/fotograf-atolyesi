@@ -1,0 +1,10 @@
+import {readFile,mkdir,writeFile,rm} from 'node:fs/promises';
+const html=await readFile(new URL('../src/index.html',import.meta.url),'utf8');
+const server=await readFile(new URL('../src/worker.mjs',import.meta.url),'utf8');
+const dir=new URL('../public/',import.meta.url);
+await rm(dir,{recursive:true,force:true});
+await mkdir(dir,{recursive:true});
+await writeFile(new URL('_worker.js',dir),`const HTML=${JSON.stringify(html)};\n${server}`);
+await writeFile(new URL('index.html',dir),html);
+await writeFile(new URL('_routes.json',dir),JSON.stringify({version:1,include:['/*'],exclude:[]}));
+console.log('Cloudflare Pages output: public');
