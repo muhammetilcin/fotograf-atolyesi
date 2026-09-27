@@ -1,49 +1,376 @@
 <!doctype html>
 <html lang="tr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#10151b">
-  <meta name="description" content="Fotoğrafınızı yükleyin, istediğiniz değişikliği yazın ve yapay zekâ ile düzenleyin.">
-  <title>Fotoğraf Atölyesi</title>
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2310151b'/%3E%3Cpath d='M16 44 28 20l8 18 5-10 7 16H16Z' fill='%23d4f370'/%3E%3Ccircle cx='44' cy='18' r='5' fill='%23d4f370'/%3E%3C/svg%3E">
-  <style>
-    :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#f3f5f4;background:#10151b;font-size:16px}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}button:focus-visible,input:focus-visible,label:focus-within{outline:2px solid #d4f370;outline-offset:3px}.app{min-height:100vh;display:grid;grid-template-rows:auto 1fr}.top{height:72px;border-bottom:1px solid #303941;display:flex;align-items:center;justify-content:space-between;padding:0 28px;gap:18px}.brand{font-weight:800;font-size:1.2rem;letter-spacing:-.04em;display:flex;gap:12px;align-items:center;white-space:nowrap}.mark{width:34px;height:34px;border-radius:10px;background:#d4f370;color:#10151b;display:grid;place-items:center;font-weight:900;font-size:22px}.topactions{display:flex;align-items:center;gap:10px}.btn{border:1px solid #47525b;border-radius:10px;padding:10px 16px;color:#f3f5f4;background:#232c34;font-weight:650;white-space:nowrap}.btn:hover:not(:disabled){background:#34404a}.btn.primary{background:#d4f370;border-color:#d4f370;color:#111812}.btn.primary:hover:not(:disabled){background:#e2ff88}.workspace{display:grid;grid-template-columns:minmax(0,1fr) 340px;min-height:0}.stage{background:#171e25;display:flex;flex-direction:column;min-width:0}.stagebar{height:57px;padding:0 24px;border-bottom:1px solid #303941;display:flex;align-items:center;justify-content:space-between;gap:12px;color:#bbc5c8;font-size:.87rem}.stagebar strong{color:#f2f4f2;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.stagebar .sub{white-space:nowrap}.canvaswrap{min-height:450px;flex:1;display:grid;place-items:center;padding:32px;overflow:hidden;position:relative;background-image:radial-gradient(#33404b 1px,transparent 1px);background-size:22px 22px}.empty{max-width:520px;text-align:center;background:#1d272f;border:1px dashed #59656c;border-radius:22px;padding:48px 36px;box-shadow:0 24px 70px #090d1280}.emptyIcon{font-size:3rem;line-height:1;margin-bottom:20px;color:#d4f370}.empty h1{font-size:2rem;line-height:1.15;letter-spacing:-.045em;margin:0 0 12px}.empty p{color:#b5c2c3;line-height:1.55;margin:0 0 24px}.empty small{display:block;color:#94a3a8;margin-top:15px}.canvasbox{display:none;position:relative;max-width:100%;max-height:calc(100vh - 220px);box-shadow:0 24px 75px #0008;touch-action:none}canvas{display:block;max-width:100%;max-height:calc(100vh - 220px);object-fit:contain}#mask{position:absolute;inset:0;width:100%;height:100%;cursor:crosshair}#mask.hide{display:none}.foot{min-height:58px;border-top:1px solid #303941;display:flex;align-items:center;justify-content:space-between;padding:10px 24px;color:#9aabb0;font-size:.86rem;gap:16px}.compare{display:flex;align-items:center;gap:8px}.compare input{accent-color:#d4f370}.side{border-left:1px solid #303941;background:#1a222a;padding:22px;overflow:auto;max-height:calc(100vh - 72px)}.side h2{font-size:1.13rem;letter-spacing:-.02em;margin:0 0 18px}.section{padding:20px 0;border-top:1px solid #34404a}.section:first-of-type{border-top:0;padding-top:0}.sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.sectionhead h3{font-size:.93rem;margin:0;font-weight:700}.reset{border:0;background:none;color:#d4f370;font-size:.82rem;padding:4px}.control{margin:0 0 19px}.control:last-child{margin-bottom:0}.controltop{display:flex;justify-content:space-between;margin-bottom:10px;color:#dce3e4;font-size:.88rem}.value{color:#9aaeb1;font-variant-numeric:tabular-nums}input[type=range]{width:100%;height:5px;appearance:none;border-radius:5px;background:#46525c;accent-color:#d4f370}input[type=range]::-webkit-slider-thumb{appearance:none;width:17px;height:17px;border-radius:50%;background:#d4f370;border:2px solid #1a222a;box-shadow:0 0 0 1px #d4f370}.tools{display:grid;grid-template-columns:1fr 1fr;gap:8px}.tool{padding:12px 8px;border-radius:10px;border:1px solid #47525b;background:#242f38;color:#e7eeee;text-align:center;font-weight:650;font-size:.86rem}.tool.active{border-color:#d4f370;background:#344338;color:#eaffaf}.hint{font-size:.83rem;color:#aab8bb;line-height:1.5;margin:12px 0 0}.status{color:#d4f370;font-size:.82rem;min-height:1.3em;margin-top:12px}.mobileTitle{display:none}input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}@media(max-width:860px){.workspace{grid-template-columns:1fr}.side{grid-row:1;max-height:none;border-left:0;border-bottom:1px solid #303941;padding:18px}.side h2{display:none}.section{padding:15px 0}.stagebar{padding:0 16px}.canvaswrap{min-height:380px;padding:16px}.foot{padding:10px 16px}.canvasbox,canvas{max-height:65vh}}@media(max-width:560px){.top{height:auto;min-height:66px;padding:12px 16px;flex-wrap:wrap}.brand{font-size:1.07rem}.topactions{gap:6px}.btn{padding:9px 11px;font-size:.84rem}.workspace{display:flex;flex-direction:column}.side{order:2}.stage{order:1}.canvaswrap{min-height:350px}.empty{padding:32px 22px}.empty h1{font-size:1.65rem}.stagebar .sub{display:none}.foot{font-size:.78rem}.section{padding:16px 0}}
-  
-.side{width:auto}.workspace{grid-template-columns:minmax(0,1fr) 380px}.empty{padding:46px 30px}.canvasbox{width:100%;height:100%;min-height:400px;box-shadow:none;display:none}.preview{display:block;max-width:100%;max-height:calc(100vh - 240px);width:100%;height:100%;object-fit:contain}.prompt{width:100%;min-height:132px;resize:vertical;background:#121a20;border:1px solid #53616b;border-radius:12px;color:#f2f4f2;padding:13px;font:inherit;font-size:.94rem;line-height:1.5}.prompt:focus{outline:2px solid #d4f370;outline-offset:2px}.presets{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0 22px}.preset{border:1px solid #44515b;background:#25313a;color:#e5eded;padding:13px 10px;text-align:left;border-radius:12px;font-size:.86rem;line-height:1.45;cursor:pointer}.preset span{display:block;color:#d4f370;font-size:1.15rem;margin-bottom:4px}.preset:hover,.preset.selected{border-color:#d4f370;background:#303d33}.label{display:block;font-weight:650;font-size:.94rem;margin:16px 0 10px}.check{display:flex;gap:10px;align-items:flex-start;font-size:.88rem;margin:16px 0;color:#c8d5d6;line-height:1.45}.check input{accent-color:#d4f370;flex-shrink:0;margin-top:4px}.run{width:100%;padding:14px;font-size:.97rem}.badge{font-size:.75rem;font-weight:600;letter-spacing:0;border:1px solid #46553c;color:#d4f370;padding:4px 7px;border-radius:6px}.notice{font-size:.85rem;line-height:1.5;padding:12px;border:1px solid #63553b;background:#352e21;color:#ecd5a5;border-radius:10px;margin-top:15px}.subjecthint{padding:10px 0}.pin{position:absolute;width:26px;height:26px;transform:translate(-50%,-50%);border:2px solid white;background:#d4f37088;box-shadow:0 0 0 3px #10151b66;border-radius:50%;pointer-events:none;display:none}.loading{position:absolute;inset:0;display:none;place-items:center;background:#10151bcc;backdrop-filter:blur(5px);text-align:center;padding:25px}.spinner{width:40px;height:40px;border:3px solid #5d6b62;border-top-color:#d4f370;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 20px}.loading strong{display:block;font-size:1.1rem}.loading p{max-width:300px;color:#bdc8c9;line-height:1.55;font-size:.9rem}.photoFrame{position:relative;display:flex;justify-content:center;align-items:center;height:100%}.privacy{font-size:.8rem;color:#9badb0;line-height:1.5;margin:13px 0}.status{line-height:1.5}.selectedlabel{color:#d4f370;font-size:.83rem}.foot{flex-wrap:wrap}.mini{font-size:.78rem;color:#9eafb2}.error{color:#ffc6ac}.side h2{margin-bottom:8px}.hint.topHint{margin:0 0 18px}.subjectButton{margin-top:5px;white-space:normal;width:100%}.version{font-size:.78rem;color:#9dacb1}@keyframes spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.spinner{animation:none}}@media(max-width:860px){.workspace{grid-template-columns:1fr;display:flex;flex-direction:column}.side{order:2;max-height:none}.stage{order:1}.side h2{display:block}.canvasbox{min-height:280px}.preview{max-height:55vh;min-height:260px}.canvaswrap{min-height:320px}.loading{min-height:280px}}@media(max-width:560px){.top{gap:10px}.topactions{width:100%;justify-content:flex-end}.brand{flex:1}.empty h1{font-size:1.6rem}.empty{padding:30px 20px}.badge{font-size:.68rem}.canvaswrap{padding:12px}.side{padding:20px}.stagebar{height:48px}}
-</style></head><body><div class="app">
-<header class="top"><div class="brand"><span class="mark">✦</span>Fotoğraf Atölyesi <span class="badge">YAPAY ZEKÂ</span></div><div class="topactions"><button id="undo" class="btn" disabled>Geri al</button><button id="open" class="btn">Fotoğraf aç</button><button id="download" class="btn primary" disabled>İndir</button></div></header>
-<main class="workspace">
-<section class="stage" aria-label="Fotoğraf çalışma alanı"><div class="stagebar"><strong id="filename">Yeni çalışma</strong><span class="sub" id="dimensions">JPG · PNG · WebP</span></div><div class="canvaswrap" id="dropzone"><div class="empty" id="empty"><div class="emptyIcon">✦</div><h1>Fotoğrafını seç.<br>Değişikliği bize anlat.</h1><p>Işığı düzelt, dikkat dağıtan nesneleri kaldır veya fotoğrafını doğal biçimde iyileştir.</p><button class="btn primary" id="emptyOpen">Fotoğraf seç</button><small>JPG, PNG veya WebP · En fazla 10 MB</small></div><div class="canvasbox" id="canvasbox"><div class="photoFrame" id="frame"><img class="preview" id="preview" alt="Yüklenen fotoğraf"><span class="pin" id="pin" aria-hidden="true"></span></div></div><div class="loading" id="loading" role="status" aria-live="polite"><div><div class="spinner"></div><strong>Fotoğrafın düzenleniyor</strong><p id="waitingText">İsteğin ve fotoğrafın yapay zekâya gönderiliyor.</p><span class="mini">Bu işlem birkaç dakika sürebilir.</span></div></div></div><div class="foot"><label class="compare"><input id="compare" type="checkbox" disabled> Orijinalini göster</label><span id="footinfo">Fotoğrafını yükleyerek başla</span></div></section>
-<aside class="side"><h2>Ne değiştirelim?</h2><p class="hint topHint">Bir öneri seç veya kendi isteğini yaz.</p>
-<div class="presets"><button class="preset" data-preset="natural"><span>✦</span>Doğal iyileştir</button><button class="preset" data-preset="light"><span>☀</span>Işığı düzelt</button><button class="preset" data-preset="people"><span>◎</span>Arkadaki insanları kaldır</button><button class="preset" data-preset="detail"><span>◈</span>Netliği artır</button></div>
-<label class="label" for="prompt">Düzenleme isteğin</label><textarea id="prompt" class="prompt" maxlength="3000" placeholder="Örneğin: Masadaki peçeteyi kaldır. Yüzümü değiştirmeden ışığı düzelt ve renkleri doğal tut."></textarea>
-<button id="subject" class="btn subjectButton" disabled>Korumak istediğin kişiyi işaretle</button><div id="subjectStatus" class="hint subjecthint">Kalabalık fotoğraflarda isteğe bağlı.</div>
-<label class="check"><input id="preserve" type="checkbox" checked><span>Yüzleri ve doğal görünümü koru</span></label>
-<button id="run" class="btn primary run" disabled>✦ Yapay zekâ ile düzenle</button>
-<p class="privacy">Düzenle’ye bastığında fotoğrafın ve isteğin OpenAI’a gönderilir. Bu uygulama fotoğraflarını kalıcı olarak saklamaz.</p>
-<div id="connection" class="notice" role="status">Yapay zekâ bağlantısı kontrol ediliyor…</div>
-<div id="status" class="status" role="status" aria-live="polite"></div>
-<div class="section" style="margin-top:18px"><button id="reset" class="reset" disabled>Orijinale dön</button><p class="hint">Sonuç hazır olduğunda yeni bir istek yazarak düzenlemeye devam edebilirsin. Yüzler ve ayrıntılar için sonucu kontrol et.</p></div>
-</aside></main></div><input id="file" type="file" accept="image/jpeg,image/png,image/webp">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0d1319">
+<title>Fotoğraf Atölyesi v0.1</title>
+<style>
+:root{
+  --bg:#0d1319;--panel:#151e26;--panel2:#1c2730;--line:#33414c;--txt:#edf3f2;
+  --muted:#9fb0b4;--accent:#d7f46b;--accent2:#a9c449;--danger:#ffb596;
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--txt)}
+button,input,textarea{font:inherit} button{cursor:pointer}
+button:disabled{opacity:.42;cursor:not-allowed}
+.app{min-height:100vh;display:grid;grid-template-rows:auto 1fr}
+.top{min-height:70px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 22px;gap:14px;background:#0f161d}
+.brand{display:flex;align-items:center;gap:11px;font-weight:850;font-size:1.14rem;letter-spacing:-.03em}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--accent);color:#10170f;display:grid;place-items:center;font-size:22px}
+.badge{font-size:.7rem;border:1px solid #52623e;color:var(--accent);padding:4px 7px;border-radius:7px;font-weight:750}
+.topActions{display:flex;gap:8px;flex-wrap:wrap}
+.btn{border:1px solid #46545f;background:#202c35;color:var(--txt);padding:10px 14px;border-radius:10px;font-weight:700}
+.btn:hover:not(:disabled){background:#2c3944}
+.btn.primary{background:var(--accent);color:#11180e;border-color:var(--accent)}
+.btn.primary:hover:not(:disabled){background:#e4fb91}
+.btn.ghost{background:transparent}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 390px;min-height:0}
+.stage{min-width:0;display:flex;flex-direction:column;background:#131b22}
+.stagebar{height:54px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 18px;color:var(--muted);font-size:.84rem;gap:12px}
+.stagebar strong{color:var(--txt);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.workspace{flex:1;min-height:500px;padding:24px;display:grid;place-items:center;overflow:hidden;
+  background-image:radial-gradient(#2d3a44 1px,transparent 1px);background-size:23px 23px}
+.empty{width:min(580px,100%);text-align:center;border:1px dashed #53636d;background:#18222a;border-radius:22px;padding:46px 28px;box-shadow:0 22px 65px #0006}
+.empty .big{font-size:3rem;color:var(--accent);line-height:1}
+.empty h1{font-size:2rem;letter-spacing:-.045em;line-height:1.12;margin:18px 0 10px}
+.empty p{color:#b4c2c4;line-height:1.6;margin:0 0 22px}
+.editor{display:none;width:100%;height:100%;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.canvasFrame{position:relative;display:inline-block;max-width:100%;max-height:calc(100vh - 205px);box-shadow:0 22px 72px #0009}
+canvas{display:block;max-width:100%;max-height:calc(100vh - 205px);object-fit:contain}
+#overlay{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:none;cursor:crosshair}
+.footer{min-height:54px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:9px 18px;color:var(--muted);font-size:.82rem;gap:12px;flex-wrap:wrap}
+.side{background:var(--panel);border-left:1px solid var(--line);padding:18px;overflow:auto;max-height:calc(100vh - 70px)}
+.side h2{margin:0 0 4px;font-size:1.1rem}.lead{color:var(--muted);font-size:.84rem;line-height:1.5;margin:0 0 16px}
+.section{border-top:1px solid var(--line);padding:17px 0}.section:first-of-type{border-top:0;padding-top:0}
+.section h3{margin:0 0 12px;font-size:.9rem}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tool{border:1px solid #45535e;background:#202c35;color:#ecf3f2;border-radius:11px;padding:11px 9px;text-align:left;font-weight:700;font-size:.83rem}
+.tool small{display:block;color:var(--muted);font-weight:500;margin-top:3px;line-height:1.3}
+.tool.active{border-color:var(--accent);background:#2c392d;color:#efffc1}
+.ctrl{margin:14px 0}.ctrl:first-child{margin-top:4px}.row{display:flex;align-items:center;justify-content:space-between;font-size:.82rem;margin-bottom:8px}.value{color:var(--muted);font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.command{width:100%;min-height:100px;resize:vertical;background:#0f171d;color:var(--txt);border:1px solid #4d5d68;border-radius:11px;padding:12px;line-height:1.45}
+.command:focus{outline:2px solid var(--accent);outline-offset:2px}
+.hint{font-size:.78rem;color:var(--muted);line-height:1.45;margin:8px 0 0}
+.status{font-size:.82rem;line-height:1.45;color:var(--accent);min-height:1.2em;margin-top:10px}
+.notice{border:1px solid #58683e;background:#28311f;color:#dff4a5;border-radius:10px;padding:11px;font-size:.79rem;line-height:1.45}
+.pill{display:inline-flex;align-items:center;gap:7px}.dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
+.maskRow{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+label.check{display:flex;align-items:center;gap:8px;color:#cbd8d9;font-size:.82rem}
+input[type=checkbox]{accent-color:var(--accent)}
+input[type=file]{display:none}
+@media(max-width:900px){
+  .main{grid-template-columns:1fr}.side{max-height:none;border-left:0;border-top:1px solid var(--line)}
+  .workspace{min-height:390px}.canvasFrame,canvas{max-height:62vh}
+}
+@media(max-width:560px){
+  .top{align-items:flex-start}.brand{font-size:1rem}.badge{display:none}.btn{padding:9px 10px;font-size:.82rem}
+  .topActions{justify-content:flex-end}.workspace{padding:12px}.empty{padding:34px 18px}.empty h1{font-size:1.55rem}
+  .side{padding:16px}.quick{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div class="brand"><span class="logo">✦</span> Fotoğraf Atölyesi <span class="badge">WEB v0.1</span></div>
+    <div class="topActions">
+      <button id="undoBtn" class="btn" disabled>Geri al</button>
+      <button id="redoBtn" class="btn" disabled>İleri al</button>
+      <button id="openBtn" class="btn">Fotoğraf aç</button>
+      <button id="downloadBtn" class="btn primary" disabled>İndir</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <section class="stage">
+      <div class="stagebar">
+        <strong id="filename">Yeni çalışma</strong>
+        <span id="dimensions">JPG · PNG · WebP</span>
+      </div>
+
+      <div class="workspace" id="dropzone">
+        <div class="empty" id="empty">
+          <div class="big">✦</div>
+          <h1>Fotoğrafını aç.<br>Tarayıcıda düzenle.</h1>
+          <p>İlk sürümde ışık, kontrast, renk, netlik, döndürme ve Türkçe komutlarla düzenleme çalışır. Fotoğraf bu sürümde cihazından dışarı gönderilmez.</p>
+          <button id="emptyOpen" class="btn primary">Fotoğraf seç</button>
+        </div>
+
+        <div class="editor" id="editor">
+          <div class="canvasFrame" id="frame">
+            <canvas id="canvas"></canvas>
+            <canvas id="overlay"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <label class="check"><input id="compare" type="checkbox" disabled> Orijinali göster</label>
+        <span id="footInfo">Fotoğrafını yükleyerek başla</span>
+      </div>
+    </section>
+
+    <aside class="side">
+      <h2>Düzenleme</h2>
+      <p class="lead">Önce çalışan web uygulamasını deneyelim. Beğendiğimiz akışın üzerine gerçek AI nesne silme ve yüz koruma motorunu ekleyeceğiz.</p>
+
+      <div class="section">
+        <div class="notice"><span class="pill"><span class="dot"></span><strong>Yerel mod</strong></span><br>Bu sürüm API anahtarı istemez. Temel işlemler tarayıcında yapılır.</div>
+      </div>
+
+      <div class="section">
+        <h3>Hızlı işlemler</h3>
+        <div class="quick">
+          <button class="tool" id="autoBtn" disabled>✦ Otomatik iyileştir<small>Işık + renk dengesi</small></button>
+          <button class="tool" id="sharpenBtn" disabled>◈ Netleştir<small>Hafif keskinlik</small></button>
+          <button class="tool" id="bwBtn" disabled>◐ Siyah-beyaz<small>Tek tık</small></button>
+          <button class="tool" id="rotateBtn" disabled>↻ 90° döndür<small>Sağa çevir</small></button>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3>İnce ayar</h3>
+        <div class="ctrl"><div class="row"><span>Işık</span><span class="value" id="vBrightness">100%</span></div><input id="brightness" type="range" min="60" max="145" value="100" disabled></div>
+        <div class="ctrl"><div class="row"><span>Kontrast</span><span class="value" id="vContrast">100%</span></div><input id="contrast" type="range" min="60" max="150" value="100" disabled></div>
+        <div class="ctrl"><div class="row"><span>Renk</span><span class="value" id="vSaturation">100%</span></div><input id="saturation" type="range" min="0" max="180" value="100" disabled></div>
+        <div class="ctrl"><div class="row"><span>Sıcaklık</span><span class="value" id="vWarmth">0</span></div><input id="warmth" type="range" min="-30" max="35" value="0" disabled></div>
+        <div class="ctrl"><div class="row"><span>Bulanıklık</span><span class="value" id="vBlur">0.0</span></div><input id="blur" type="range" min="0" max="30" value="0" disabled></div>
+        <button id="applyAdjustBtn" class="btn primary" style="width:100%" disabled>Ayarları uygula</button>
+      </div>
+
+      <div class="section">
+        <h3>Komutla düzenle</h3>
+        <textarea id="command" class="command" placeholder="Örn: Işığı biraz artır, kontrastı yükselt ve netleştir." disabled></textarea>
+        <button id="commandBtn" class="btn primary" style="width:100%;margin-top:9px" disabled>Komutu uygula</button>
+        <p class="hint">Şimdilik Türkçe anahtar kelimeleri yerel olarak yorumlar. Örnek: “ışığı artır”, “renkleri canlandır”, “siyah beyaz yap”, “netleştir”, “sağa döndür”.</p>
+      </div>
+
+      <div class="section">
+        <h3>Nesne seçimi — hazırlık</h3>
+        <div class="maskRow">
+          <button id="maskBtn" class="btn" disabled>Fırça ile işaretle</button>
+          <button id="clearMaskBtn" class="btn" disabled>İşareti temizle</button>
+        </div>
+        <div class="ctrl"><div class="row"><span>Fırça boyutu</span><span class="value" id="vBrush">36 px</span></div><input id="brush" type="range" min="12" max="120" value="36" disabled></div>
+        <p class="hint">Bu işaretleme altyapısı gerçek AI nesne silme özelliğini ekleyeceğimiz bölüm. v0.1'de yalnızca seçim yapar; sahte “AI silme” uygulanmaz.</p>
+      </div>
+
+      <div class="section">
+        <button id="resetBtn" class="btn ghost" style="width:100%" disabled>Orijinale dön</button>
+        <div id="status" class="status"></div>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<input id="fileInput" type="file" accept="image/jpeg,image/png,image/webp">
+
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);let original=null,current=null,history=[],busy=false,ready=false,selecting=false,subject=null,loadId=0;const objectUrls=new Set();
-const presets={natural:'Fotoğrafın ışığını, beyaz dengesini ve renklerini doğal bir fotoğraf düzenlemesiyle iyileştir. Gerekli ölçüde netleştir. Yüzleri, kompozisyonu ve gerçekçi görünümü koru.',light:'Fotoğrafın pozlamasını, gölgelerini ve parlak alanlarını dengeli hale getir. Patlayan ışıkları azalt. Doğal atmosferi ve yüzleri koru.',people:'Fotoğraftaki ana kişiyi koru; arka plandaki diğer insanları kaldır. Boşalan alanları çevreyle uyumlu ve doğal biçimde tamamla. Birden fazla ana kişi varsa işaretlediğim kişiyi koru.',detail:'Fotoğrafı doğal sınırlar içinde netleştir, hafif bulanıklığı ve görüntü gürültüsünü azalt. Yüzün kimliğini değiştirme, yapay keskinlik veya yeni ayrıntılar ekleme.'};
-function message(text,error=false){$('status').textContent=text;$('status').classList.toggle('error',error)}
-function sync(){for(const id of ['open','emptyOpen','prompt','preserve','subject','reset','download','compare','undo'])$(id).disabled=busy||(['subject','reset','download'].includes(id)&&!current)||(id==='compare'&&current===original)||(id==='undo'&&!history.length);$('run').disabled=busy||!ready||!current||$('prompt').value.trim().length<3;$('run').textContent=ready?'✦ Yapay zekâ ile düzenle':'Yapay zekâ bağlantısı bekleniyor';document.querySelectorAll('.preset').forEach(b=>b.disabled=busy);$('loading').style.display=busy?'grid':'none';$('subject').classList.toggle('primary',selecting)}
-function show(){if(!current)return;$('preview').src=$('compare').checked?original.url:current.url;$('preview').alt=$('compare').checked?'Orijinal fotoğraf':'Düzenlenen fotoğraf';$('footinfo').textContent=current===original?'Orijinal fotoğraf':history.length+'. düzenleme';$('dimensions').textContent=current.width+' × '+current.height+' piksel';$('pin').style.display='none';sync()}
-async function imageFromBlob(blob){const url=URL.createObjectURL(blob);objectUrls.add(url);try{const image=new Image();image.src=url;await image.decode();return {blob,url,width:image.naturalWidth,height:image.naturalHeight}}catch(e){URL.revokeObjectURL(url);objectUrls.delete(url);throw e}}
-async function load(file){if(busy||!file)return;if(!['image/jpeg','image/png','image/webp'].includes(file.type)){message('JPG, PNG veya WebP fotoğraf seç.',true);return}if(file.size>10*1024*1024){message('Fotoğraf en fazla 10 MB olabilir.',true);return}const id=++loadId;try{const item=await imageFromBlob(file);if(id!==loadId){URL.revokeObjectURL(item.url);objectUrls.delete(item.url);return}for(const url of objectUrls){if(url!==item.url){URL.revokeObjectURL(url);objectUrls.delete(url)}}original=current=item;history=[];subject=null;selecting=false;$('subjectStatus').textContent='Kalabalık fotoğraflarda isteğe bağlı.';$('filename').textContent=file.name;$('empty').hidden=true;$('canvasbox').style.display='block';$('compare').checked=false;message('Fotoğraf hazır. Ne değiştirmek istediğini yaz.');show()}catch{message('Fotoğraf açılamadı. Başka bir dosya seç.',true)}}
-$('open').onclick=$('emptyOpen').onclick=()=>$('file').click();$('file').onchange=e=>{load(e.target.files[0]);e.target.value=''};$('dropzone').ondragover=e=>e.preventDefault();$('dropzone').ondrop=e=>{e.preventDefault();load(e.dataTransfer.files[0])};
-document.querySelectorAll('.preset').forEach(button=>button.onclick=()=>{$('prompt').value=presets[button.dataset.preset];document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('selected',b===button));if(button.dataset.preset==='people')$('subjectStatus').textContent='Korumak istediğin kişiyi işaretleyebilir veya kıyafetiyle tarif edebilirsin.';sync()});
-$('prompt').oninput=()=>{document.querySelectorAll('.preset').forEach(b=>b.classList.remove('selected'));sync()};$('compare').onchange=show;
-$('subject').onclick=()=>{selecting=!selecting;$('compare').checked=false;show();$('subjectStatus').textContent=selecting?'Fotoğrafta korunacak kişiye dokun.':'Kişi seçimi kapatıldı.';$('preview').style.cursor=selecting?'crosshair':'default'};
-$('preview').onclick=e=>{if(!selecting||busy||!current)return;const r=$('preview').getBoundingClientRect(),scale=Math.min(r.width/current.width,r.height/current.height),width=current.width*scale,height=current.height*scale,left=r.left+(r.width-width)/2,top=r.top+(r.height-height)/2;const x=(e.clientX-left)/width*100,y=(e.clientY-top)/height*100;if(x<0||x>100||y<0||y>100)return;subject={x,y};selecting=false;const f=$('frame').getBoundingClientRect();$('pin').style.left=e.clientX-f.left+'px';$('pin').style.top=e.clientY-f.top+'px';$('pin').style.display='block';$('preview').style.cursor='default';$('subjectStatus').textContent='Korunacak kişi işaretlendi.';sync()};
-async function check(){try{const r=await fetch('/api/status',{cache:'no-store'});if(!r.ok)throw Error();const s=await r.json();ready=s.ready;$('connection').textContent=s.ready?s.message:'Bu sitenin yapay zekâ bağlantısı henüz kurulmamış. Bağlantı etkinleştirildiğinde düzenleme açılacak.';$('connection').hidden=ready}catch{ready=false;$('connection').hidden=false;$('connection').textContent='Yapay zekâ bağlantısı kontrol edilemedi.'}finally{sync()}}
-async function run(){if(busy||!current)return;const prompt=$('prompt').value.trim();if(prompt.length<3){message('Ne değiştirmek istediğini yaz.',true);return}busy=true;sync();await check();if(!ready){busy=false;sync();message('Otomatik düzenleme bağlantısı henüz etkin değil. Fotoğrafın gönderilmedi.',true);return}selecting=false;$('compare').checked=false;show();message('');const form=new FormData();form.append('image',current.blob,'photo.'+({'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[current.blob.type]||'png'));form.append('prompt',prompt);form.append('preserve',String($('preserve').checked));if(subject)form.append('subject',JSON.stringify(subject));$('waitingText').textContent='Fotoğrafın ve isteğin yapay zekâya gönderiliyor.';const timer=setTimeout(()=>{$('waitingText').textContent='Düzenleme devam ediyor. Fotoğrafın içeriğine göre biraz daha sürebilir.'},20000);try{const response=await fetch('/api/edit',{method:'POST',body:form,signal:AbortSignal.timeout(200000)});if(!response.ok){const error=await response.json().catch(()=>({}));throw Error(error.error?.message||'Fotoğraf düzenlenemedi.')}if(!response.headers.get('content-type')?.startsWith('image/'))throw Error('Beklenen fotoğraf alınamadı.');const result=await imageFromBlob(await response.blob());history.push(current);if(history.length>5){const removed=history.shift();if(removed!==original){URL.revokeObjectURL(removed.url);objectUrls.delete(removed.url)}}current=result;subject=null;$('subjectStatus').textContent='Yeni düzenleme için kişiyi tekrar işaretleyebilirsin.';message('Fotoğrafın hazır. Orijinaliyle karşılaştırabilir veya yeni bir istek yazabilirsin.')}catch(e){message(e.name==='TimeoutError'?'İşlem beklenenden uzun sürdü. Biraz sonra tekrar dene.':e.message,true)}finally{clearTimeout(timer);busy=false;show()}}
-$('run').onclick=run;$('undo').onclick=()=>{if(history.length&&!busy){const removed=current;current=history.pop();URL.revokeObjectURL(removed.url);objectUrls.delete(removed.url);subject=null;$('compare').checked=false;show();message('Son düzenleme geri alındı.')}};$('reset').onclick=()=>{if(busy||!original)return;for(const url of objectUrls){if(url!==original.url){URL.revokeObjectURL(url);objectUrls.delete(url)}}history=[];current=original;subject=null;$('compare').checked=false;show();message('Orijinal fotoğrafa dönüldü.')};$('download').onclick=()=>{if(!current)return;const a=document.createElement('a');a.href=current.url;const ext={'image/jpeg':'jpg','image/png':'png','image/webp':'webp'}[current.blob.type]||'png';a.download=$('filename').textContent.replace(/\.[^.]+$/,'')+'-duzenlenmis.'+ext;a.click()};
-if(document.modelContext?.registerTool){try{Promise.resolve(document.modelContext.registerTool({name:'set_edit_request',title:'Fotoğraf düzenleme isteğini hazırla',description:'Yüklü fotoğraf için düzenleme isteğini yazar. Fotoğrafı göndermez; kullanıcı Düzenle ile başlatır.',inputSchema:{type:'object',properties:{prompt:{type:'string',minLength:3,maxLength:3000}},required:['prompt'],additionalProperties:false},annotations:{readOnlyHint:false},execute(input){if(busy)throw Error('Düzenleme sürüyor.');if(!input||typeof input.prompt!=='string'||input.prompt.trim().length<3||input.prompt.length>3000)throw Error('Geçersiz istek.');$('prompt').value=input.prompt;sync();return {prepared:true}}})).catch(()=>{})}catch{}}
-check();sync();
+const $=id=>document.getElementById(id);
+const canvas=$('canvas'), ctx=canvas.getContext('2d',{willReadFrequently:true});
+const overlay=$('overlay'), octx=overlay.getContext('2d');
+let originalCanvas=null, history=[], future=[], filename='fotoğraf.jpg', drawing=false, maskMode=false;
+let previewBase=null;
+
+const sliders=['brightness','contrast','saturation','warmth','blur'];
+const sliderDefaults={brightness:100,contrast:100,saturation:100,warmth:0,blur:0};
+
+function msg(t,err=false){$('status').textContent=t;$('status').style.color=err?'#ffb596':'#d7f46b'}
+function hasImage(){return !!originalCanvas}
+function makeSnapshot(){
+  const c=document.createElement('canvas');c.width=canvas.width;c.height=canvas.height;c.getContext('2d').drawImage(canvas,0,0);return c
+}
+function pushHistory(){
+  if(!hasImage())return;
+  history.push(makeSnapshot()); if(history.length>8) history.shift(); future=[];
+}
+function restoreFrom(c){
+  canvas.width=c.width;canvas.height=c.height;overlay.width=c.width;overlay.height=c.height;
+  ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(c,0,0);
+  clearMask(); resetSliders(false); updateMeta(); sync();
+}
+function sync(){
+  const on=hasImage();
+  ['downloadBtn','autoBtn','sharpenBtn','bwBtn','rotateBtn','applyAdjustBtn','commandBtn','maskBtn','clearMaskBtn','resetBtn','command','brush',...sliders]
+    .forEach(id=>$(id).disabled=!on);
+  $('compare').disabled=!on;
+  $('undoBtn').disabled=!on||history.length===0;
+  $('redoBtn').disabled=!on||future.length===0;
+}
+function resetSliders(render=true){
+  for(const [id,v] of Object.entries(sliderDefaults)) $(id).value=v;
+  updateSliderLabels();
+  if(render) renderPreview();
+}
+function updateSliderLabels(){
+  $('vBrightness').textContent=$('brightness').value+'%';
+  $('vContrast').textContent=$('contrast').value+'%';
+  $('vSaturation').textContent=$('saturation').value+'%';
+  $('vWarmth').textContent=$('warmth').value;
+  $('vBlur').textContent=(+$('blur').value/10).toFixed(1);
+  $('vBrush').textContent=$('brush').value+' px';
+}
+function filterString(){
+  const b=$('brightness').value,c=$('contrast').value,s=$('saturation').value,w=+$('warmth').value,bl=+$('blur').value/10;
+  const sepia=Math.max(0,w)*0.7, hue=w<0?Math.abs(w)*0.45:-w*0.18;
+  return `brightness(${b}%) contrast(${c}%) saturate(${s}%) sepia(${sepia}%) hue-rotate(${hue}deg) blur(${bl}px)`;
+}
+function renderPreview(){
+  if(!hasImage())return;
+  if(!previewBase) previewBase=makeSnapshot();
+  ctx.save();ctx.clearRect(0,0,canvas.width,canvas.height);ctx.filter=filterString();ctx.drawImage(previewBase,0,0);ctx.restore();
+}
+function commitAdjustments(){
+  if(!hasImage())return;
+  const changed=sliders.some(id=>+$ (id).value!==sliderDefaults[id]);
+  if(!changed){msg('Ayar değiştirilmedi.');return}
+  const base=previewBase||makeSnapshot();
+  history.push(base); if(history.length>8)history.shift(); future=[];
+  previewBase=null; resetSliders(false); msg('Ayarlar uygulandı.'); updateMeta(); sync();
+}
+function drawSourceToCanvas(img,w,h){
+  canvas.width=w;canvas.height=h;overlay.width=w;overlay.height=h;
+  ctx.clearRect(0,0,w,h);ctx.drawImage(img,0,0,w,h);
+}
+async function loadFile(file){
+  if(!file)return;
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){msg('JPG, PNG veya WebP seç.',true);return}
+  filename=file.name;
+  const url=URL.createObjectURL(file), img=new Image(); img.src=url;
+  try{await img.decode()}catch{URL.revokeObjectURL(url);msg('Fotoğraf açılamadı.',true);return}
+  const maxEdge=2600, scale=Math.min(1,maxEdge/Math.max(img.naturalWidth,img.naturalHeight));
+  const w=Math.max(1,Math.round(img.naturalWidth*scale)),h=Math.max(1,Math.round(img.naturalHeight*scale));
+  drawSourceToCanvas(img,w,h);URL.revokeObjectURL(url);
+  originalCanvas=makeSnapshot();history=[];future=[];previewBase=null;clearMask();resetSliders(false);
+  $('empty').style.display='none';$('editor').style.display='flex';$('filename').textContent=filename;
+  $('compare').checked=false;updateMeta();sync();
+  msg(scale<1?'Fotoğraf açıldı. Web denemesi için uzun kenar 2600 px’e ölçeklendi.':'Fotoğraf hazır.');
+}
+function updateMeta(){
+  if(!hasImage())return;
+  $('dimensions').textContent=canvas.width+' × '+canvas.height+' piksel';
+  $('footInfo').textContent='Yerel web düzenleme · fotoğraf cihazından çıkmaz';
+}
+function applyFiltered(values){
+  previewBase=null;
+  for(const [k,v] of Object.entries(values)) if($(k)) $(k).value=v;
+  renderPreview();commitAdjustments();
+}
+function autoEnhance(){
+  if(!hasImage())return;
+  const data=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  let sum=0,count=0; const step=Math.max(4,Math.floor(data.length/240000/4)*4);
+  for(let i=0;i<data.length;i+=step){sum+=(data[i]*0.2126+data[i+1]*0.7152+data[i+2]*0.0722);count++}
+  const avg=sum/count; let br=100;
+  if(avg<95) br=114; else if(avg<120) br=108; else if(avg>185) br=91; else if(avg>160) br=96;
+  applyFiltered({brightness:br,contrast:108,saturation:106,warmth:2,blur:0});
+  msg('Otomatik iyileştirme uygulandı.');
+}
+function grayscale(){
+  pushHistory();previewBase=null;
+  const base=makeSnapshot();ctx.save();ctx.clearRect(0,0,canvas.width,canvas.height);ctx.filter='grayscale(100%)';ctx.drawImage(base,0,0);ctx.restore();msg('Siyah-beyaz uygulandı.');sync()
+}
+function rotate(){
+  pushHistory();previewBase=null;
+  const src=makeSnapshot(), w=src.width,h=src.height;
+  canvas.width=h;canvas.height=w;overlay.width=h;overlay.height=w;
+  ctx.save();ctx.translate(h,0);ctx.rotate(Math.PI/2);ctx.drawImage(src,0,0);ctx.restore();clearMask();updateMeta();msg('Fotoğraf 90° döndürüldü.');sync()
+}
+function sharpen(){
+  pushHistory();previewBase=null;
+  const img=ctx.getImageData(0,0,canvas.width,canvas.height), d=img.data, w=canvas.width,h=canvas.height;
+  const out=new Uint8ClampedArray(d);
+  for(let y=1;y<h-1;y++){
+    for(let x=1;x<w-1;x++){
+      const i=(y*w+x)*4;
+      for(let c=0;c<3;c++){
+        const center=d[i+c]*5;
+        const val=center-d[i-4+c]-d[i+4+c]-d[i-w*4+c]-d[i+w*4+c];
+        out[i+c]=Math.max(0,Math.min(255,val));
+      }
+    }
+  }
+  ctx.putImageData(new ImageData(out,w,h),0,0);msg('Netleştirme uygulandı.');sync()
+}
+function undo(){
+  if(!history.length)return;
+  future.push(makeSnapshot());const prev=history.pop();previewBase=null;restoreFrom(prev);msg('Son işlem geri alındı.')
+}
+function redo(){
+  if(!future.length)return;
+  history.push(makeSnapshot());const next=future.pop();previewBase=null;restoreFrom(next);msg('İşlem yeniden uygulandı.')
+}
+function resetOriginal(){
+  if(!originalCanvas)return;
+  history.push(makeSnapshot()); if(history.length>8)history.shift(); future=[];previewBase=null;restoreFrom(originalCanvas);msg('Orijinale dönüldü.')
+}
+function download(){
+  if(!hasImage())return;
+  const a=document.createElement('a');
+  const base=filename.replace(/\.[^.]+$/,'')||'fotograf';
+  a.download=base+'-duzenlenmis.jpg';a.href=canvas.toDataURL('image/jpeg',0.94);a.click();
+}
+function compare(on){
+  if(!hasImage())return;
+  if(on){
+    const cur=makeSnapshot(); canvas.dataset.compare='1'; canvas._current=cur;
+    ctx.clearRect(0,0,canvas.width,canvas.height);ctx.drawImage(originalCanvas,0,0,canvas.width,canvas.height);
+  }else if(canvas._current){
+    const c=canvas._current;canvas.width=c.width;canvas.height=c.height;overlay.width=c.width;overlay.height=c.height;ctx.drawImage(c,0,0);canvas._current=null;
+  }
+}
+function commandRun(){
+  if(!hasImage())return;
+  const t=$('command').value.toLocaleLowerCase('tr-TR').trim();
+  if(!t){msg('Önce bir komut yaz.',true);return}
+  let did=false, vals={brightness:100,contrast:100,saturation:100,warmth:0,blur:0};
+  if(/ışık|parlak|aydın/.test(t)){vals.brightness=/azalt|kıs|karart|düşür/.test(t)?88:114;did=true}
+  if(/kontrast/.test(t)){vals.contrast=/azalt|düşür/.test(t)?88:118;did=true}
+  if(/renk|canlandır|doygun/.test(t)){vals.saturation=/azalt|soluk/.test(t)?82:120;did=true}
+  if(/sıcak/.test(t)){vals.warmth=22;did=true}
+  if(/soğuk/.test(t)){vals.warmth=-20;did=true}
+  if(/bulan/.test(t)){vals.blur=12;did=true}
+  if(did && Object.values(vals).some((v,i)=>v!==[100,100,100,0,0][i])) applyFiltered(vals);
+  if(/siyah.?beyaz|grayscale|gri ton/.test(t)){grayscale();did=true}
+  if(/netleştir|keskin/.test(t)){sharpen();did=true}
+  if(/sağa.*döndür|90/.test(t)){rotate();did=true}
+  if(/otomatik|doğal.*iyileştir|iyileştir/.test(t)){autoEnhance();did=true}
+  if(/kaldır|sil|insan|nesne|arka plan/.test(t)){
+    msg('Bu komut gerçek AI nesne silme gerektiriyor. Seçim aracı hazır; AI motorunu sonraki sürümde bağlayacağız.',true);did=true
+  } else if(did){msg('Komut uygulandı.')}
+  else msg('Bu komutu v0.1 henüz tanımıyor. “ışığı artır”, “netleştir”, “siyah beyaz yap” gibi deneyebilirsin.',true)
+}
+function clearMask(){octx.clearRect(0,0,overlay.width,overlay.height)}
+function toggleMask(){
+  maskMode=!maskMode;overlay.style.display=maskMode?'block':'none';$('maskBtn').classList.toggle('primary',maskMode);
+  msg(maskMode?'İşaretlemek istediğin alanın üzerinde fırçayı sürükle.':'İşaretleme modu kapatıldı.')
+}
+function pos(ev){
+  const r=overlay.getBoundingClientRect(), sx=overlay.width/r.width, sy=overlay.height/r.height;
+  const p=ev.touches?ev.touches[0]:ev;return {x:(p.clientX-r.left)*sx,y:(p.clientY-r.top)*sy}
+}
+function brushStart(ev){if(!maskMode)return;drawing=true;ev.preventDefault();const p=pos(ev);octx.beginPath();octx.moveTo(p.x,p.y)}
+function brushMove(ev){if(!drawing||!maskMode)return;ev.preventDefault();const p=pos(ev);octx.lineCap='round';octx.lineJoin='round';octx.strokeStyle='rgba(215,244,107,.55)';octx.lineWidth=+$('brush').value;octx.lineTo(p.x,p.y);octx.stroke()}
+function brushEnd(){drawing=false}
+
+$('openBtn').onclick=$('emptyOpen').onclick=()=>$('fileInput').click();
+$('fileInput').onchange=e=>{loadFile(e.target.files[0]);e.target.value=''};
+$('dropzone').ondragover=e=>{e.preventDefault()};$('dropzone').ondrop=e=>{e.preventDefault();loadFile(e.dataTransfer.files[0])};
+$('downloadBtn').onclick=download;$('undoBtn').onclick=undo;$('redoBtn').onclick=redo;$('resetBtn').onclick=resetOriginal;
+$('autoBtn').onclick=autoEnhance;$('sharpenBtn').onclick=sharpen;$('bwBtn').onclick=grayscale;$('rotateBtn').onclick=rotate;
+$('applyAdjustBtn').onclick=commitAdjustments;$('commandBtn').onclick=commandRun;
+$('maskBtn').onclick=toggleMask;$('clearMaskBtn').onclick=()=>{clearMask();msg('İşaret temizlendi.')};
+$('compare').onchange=e=>compare(e.target.checked);
+for(const id of sliders){$(id).addEventListener('input',()=>{updateSliderLabels();renderPreview()})}
+$('brush').oninput=updateSliderLabels;
+overlay.addEventListener('mousedown',brushStart);overlay.addEventListener('mousemove',brushMove);window.addEventListener('mouseup',brushEnd);
+overlay.addEventListener('touchstart',brushStart,{passive:false});overlay.addEventListener('touchmove',brushMove,{passive:false});overlay.addEventListener('touchend',brushEnd);
+
+updateSliderLabels();sync();
 })();
-</script></body></html>
+</script>
+</body>
+</html>
